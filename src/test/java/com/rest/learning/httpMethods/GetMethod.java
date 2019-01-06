@@ -10,6 +10,11 @@ import io.restassured.specification.ResponseSpecification;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
+/**
+ * Get is used to request a resource from REST API
+ *
+ */
+
 public class GetMethod{
 	
 	@Test
@@ -115,6 +120,15 @@ public class GetMethod{
 	        spec(checkStatusCodeAndContentType).
 	    and().
 	        body("MRData.CircuitTable.Circuits.circuitId",hasSize(20));
+	}
+	
+	@Test
+	public void getPostmanEcho() {
+		given()
+		.when()
+		.get("https://postman-echo.com/GET")
+		.then()
+			.body("headers.host", equalTo("postman-echo.com"));		
 	}
 	
 	@DataProvider(name="getSeasonsList")

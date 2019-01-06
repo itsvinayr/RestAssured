@@ -7,12 +7,16 @@ import io.restassured.response.Response;
 import junit.framework.Assert;
 
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.*;
+import java.util.HashMap;
 
 class ResponseFields{
 	int statusCode;
 }
 
 public class PostMethod {
+	
+	HashMap<String, String> map = new HashMap<String, String>();
 	
 	@Test
 	public void submitForm() {
@@ -44,5 +48,19 @@ public class PostMethod {
 		// similary we can convert json to string
 		//List<String> allBooks = response.jsonPath().getList("books.title");
 	}
-
+	
+	@Test
+	public void testPost() {		
+		given()
+			.contentType(ContentType.JSON)
+			.baseUri("http://jsonplaceholder.typicode.com")
+			.basePath("/posts/")
+			.body(map)
+		.when()
+			.post()
+		.then()
+			.statusCode(201)
+			.and()
+			.body("id", equalTo(101));
+	}
 }
