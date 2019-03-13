@@ -1,11 +1,17 @@
 package com.rest.learning.httpMethods.basics;
 
 import static io.restassured.RestAssured.given;
+
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import static org.hamcrest.Matchers.equalTo;
+
+import org.testng.annotations.Test;
 
 public class Runner {
 
-	public static void main(String[] args) {
+	@Test
+	public void test() {
 		
 		// Set base URI
 		RestAssured.baseURI = "https://maps.googleapis.com";
@@ -17,7 +23,11 @@ public class Runner {
 				when().
 				get("/maps/api/place/nearbysearch/json").
 				then().
-				assertThat().statusCode(200);
+				assertThat().statusCode(200).and().
+							contentType(ContentType.JSON).and().
+							body("results[0].name", equalTo("Sydney")).and().
+							body("results[0].place_id", equalTo("ChIJP3Sa8ziYEmsRUKgyFmh9AQM")).and().
+							header("Server","pablo");
 		
 		System.out.println("Completed");
 		
