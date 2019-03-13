@@ -1,4 +1,4 @@
-package com.rest.learning.httpMethods.basics;
+package com.rest.learning.httpMethods.basics.get;
 
 import static io.restassured.RestAssured.given;
 
