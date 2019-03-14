@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 public class Runner {
 
 	@Test
-	public void test() {
+	public void testGetMethod() {
 		
 		// Set base URI
 		RestAssured.baseURI = "https://maps.googleapis.com";
