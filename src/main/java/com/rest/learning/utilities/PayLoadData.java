@@ -19,5 +19,25 @@ public class PayLoadData {
 				"";
 		return body;
 	}
+	
+	public static String getAddBookData(String isbn, String aisle) {
+		String body = "{\r\n" + 
+				"\"name\":\"Learn Appium Automation with Java\",\r\n" + 
+				"\"isbn\":\""+isbn+"\",\r\n" + 
+				"\"aisle\":\""+aisle+"\",\r\n" + 
+				"\"author\":\"John foe\"\r\n" + 
+				"}";
+		return body;
+	}
+	
+	public static String deleteBookData(String id) {
+		String body = "{\r\n" + 
+				" \r\n" + 
+				"\"ID\" : \""+id+"\"\r\n" + 
+				" \r\n" + 
+				"}\r\n" + 
+				"";
+		return body;
+	}
 
 }
