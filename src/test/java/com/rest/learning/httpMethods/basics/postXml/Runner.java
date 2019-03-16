@@ -11,11 +11,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import com.rest.learning.utilities.ResourceData;
+import com.rest.learning.utilities.Utilities;
 import com.rest.learning.utilities.XMLUtility;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
+import io.restassured.path.xml.XmlPath;
 import io.restassured.response.Response;
 
 public class Runner {
@@ -47,9 +49,28 @@ public class Runner {
 							contentType(ContentType.XML).and().
 							body("response.status", equalTo("OK")).
 		extract().response();		
+		 
+		XmlPath xml = Utilities.rawToXml(response);
+		String placeId = xml.get("response.place_id");
+		System.out.println("Place id is "+placeId);		
 		
-		  String responseString = response.asString();// converting raw response to string
-		  System.out.println(responseString); 
+		String deleteBody = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n" + 
+				"<root>\r\n" + 
+				"   <place_id>"+placeId+"</place_id>\r\n" + 
+				"</root>";
+		System.out.println(deleteBody);
+		Response deleteResponse = given().
+				queryParam("key", prop.getProperty("KEY")).
+				body(deleteBody).
+		when().
+				post(ResourceData.placeDeleteXmlData()).
+		then().
+				assertThat().
+							statusCode(200).
+							contentType(ContentType.XML).
+		extract().response();
+		
+		XmlPath deleteXml = Utilities.rawToXml(deleteResponse);		  
 		 
 	}
 
