@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 
 import com.rest.learning.utilities.ResourceData;
 import com.rest.learning.utilities.Utilities;
-import com.rest.learning.utilities.XMLUtility;
+import com.rest.learning.utilities.XmlOrJsonConversion;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -36,7 +36,7 @@ public class Runner {
 		
 		// Set base URI
 		RestAssured.baseURI = prop.getProperty("HOST");
-		String body = XMLUtility.generateStringFromResource(System.getProperty("user.dir")+"\\src\\test\\resources\\xmlFiles\\post.xml");
+		String body = XmlOrJsonConversion.generateStringFromResource(System.getProperty("user.dir")+"\\src\\test\\resources\\xmlFiles\\post.xml");
 		
 		Response response = given().
 				queryParam("key", prop.getProperty("KEY")).
