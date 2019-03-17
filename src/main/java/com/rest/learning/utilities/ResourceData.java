@@ -37,5 +37,17 @@ public class ResourceData {
 	public static String placeJiraDeleteBugData(String bugId) {
 		return "/rest/api/2/issue/"+bugId;
 	}
+	
+	public static String placeTwitterGetData() {
+		return "/home_timeline.json";
+	}
+	
+	public static String placeTwitterPostData() {
+		return "/update.json";
+	}
+	
+	public static String placeTwitterDeleteData(String tweetID) {
+		return "/destroy/"+tweetID+".json";
+	}
 
 }
